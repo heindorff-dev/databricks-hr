@@ -1,0 +1,18 @@
+targets:
+  dev:
+    mode: development
+    default: true
+    permissions:
+      - group_name: grp-developer
+        level: CAN_MANAGE
+
+    variables:
+      catalog: hr_dev
+      pause_status: PAUSED
+      success_factor_bronze_schema: "dev_${workspace.current_user.short_name}_success_factor_bronze"
+      success_factor_silver_schema: "dev_${workspace.current_user.short_name}_success_factor_silver"
+      success_factor_gold_schema: "dev_${workspace.current_user.short_name}_success_factor_gold"
+
+    workspace:
+      host: https://dbc-5346a843-c2e6.cloud.databricks.com/
+      root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/dev

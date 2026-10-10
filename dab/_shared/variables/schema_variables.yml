@@ -1,0 +1,7 @@
+variables:
+  success_factor_bronze_schema:
+    default: "success_factor_bronze"
+  success_factor_silver_schema:
+    default: "success_factor_silver"
+  success_factor_gold_schema:
+    default: "success_factor_gold"

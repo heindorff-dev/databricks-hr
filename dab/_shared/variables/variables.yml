@@ -1,0 +1,10 @@
+variables:
+  catalog:
+    description: The catalog
+
+  pause_status:
+    description: Should scheduled jobs be paused? PAUSED / UNPAUSED
+
+  run_as_service_principal_name:
+    description: Service principal application ID used to run non-development bundle workloads.
+    default: ""

@@ -1,0 +1,17 @@
+targets:
+  prod:
+    mode: production
+    permissions:
+      - group_name: grp-developer
+        level: CAN_RUN
+
+    variables:
+      catalog: hr_prod
+      pause_status: UNPAUSED
+
+    workspace:
+      host: https://dbc-5346a843-c2e6.cloud.databricks.com/
+      root_path: /Workspace/Shared/Prod/.bundle/${bundle.name}
+
+    run_as:
+      service_principal_name: ${var.run_as_service_principal_name}

@@ -1,0 +1,17 @@
+bundle:
+  name: hr_infrastructure
+  engine: direct
+
+include:
+  - ../_shared/targets/*.yml
+  - ../_shared/variables/*.yml
+  - ../_shared/resources/*.yml
+  - resources/jobs/*.job.yml
+
+resources:
+  job_runs:
+    apply_tags:
+      job_id: ${resources.jobs.tag_hr_schemas.id}
+      lifecycle:
+        triggers:
+          - on_bundle_deploy: true

@@ -1,0 +1,25 @@
+resources:
+  schemas:
+    success_factor_bronze:
+      name: ${var.success_factor_bronze_schema}
+      catalog_name: ${var.catalog}
+      comment: "HR SuccessFactors bronze data"
+      grants:
+        - principal: grp-hr-bronze-reader
+          privileges: [SELECT, USE_SCHEMA]
+
+    success_factor_silver:
+      name: ${var.success_factor_silver_schema}
+      catalog_name: ${var.catalog}
+      comment: "HR SuccessFactors silver data"
+      grants:
+        - principal: grp-hr-silver-reader
+          privileges: [SELECT, USE_SCHEMA]
+
+    success_factor_gold:
+      name: ${var.success_factor_gold_schema}
+      catalog_name: ${var.catalog}
+      comment: "HR SuccessFactors gold data"
+      grants:
+        - principal: grp-hr-gold-reader
+          privileges: [SELECT, USE_SCHEMA]
