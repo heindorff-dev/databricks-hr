@@ -3,7 +3,8 @@ resources:
     tag_hr_schemas:
       name: tag_hr_schemas
       tags:
-        HR: ""
+        "People and Culture": ""
+        environment: ${var.environment}
       tasks:
         - task_key: apply_governed_tags
           notebook_task:

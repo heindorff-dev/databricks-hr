@@ -8,10 +8,11 @@ targets:
     variables:
       catalog: hr_test
       pause_status: UNPAUSED
+      environment: test
 
     workspace:
       host: https://dbc-5346a843-c2e6.cloud.databricks.com/
       root_path: /Workspace/Shared/Test/.bundle/${bundle.name}
 
     run_as:
-      service_principal_name: ${var.run_as_service_principal_name}
+      service_principal_name: 1f926f03-1ad3-4dc4-b0a2-2fd08c11752e

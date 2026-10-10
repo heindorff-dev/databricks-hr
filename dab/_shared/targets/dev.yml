@@ -9,6 +9,7 @@ targets:
     variables:
       catalog: hr_dev
       pause_status: PAUSED
+      environment: dev
       success_factor_bronze_schema: "dev_${workspace.current_user.short_name}_success_factor_bronze"
       success_factor_silver_schema: "dev_${workspace.current_user.short_name}_success_factor_silver"
       success_factor_gold_schema: "dev_${workspace.current_user.short_name}_success_factor_gold"

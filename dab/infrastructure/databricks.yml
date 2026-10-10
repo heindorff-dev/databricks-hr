@@ -2,6 +2,9 @@ bundle:
   name: hr_infrastructure
   engine: direct
 
+experimental:
+  skip_name_prefix_for_schema: true
+
 include:
   - ../_shared/targets/*.yml
   - ../_shared/variables/*.yml
