@@ -11,8 +11,23 @@ targets:
       pause_status: PAUSED
       environment: dev
       success_factor_bronze_schema: "dev_${workspace.current_user.short_name}_success_factor_bronze"
+      greenhouse_bronze_schema: "dev_${workspace.current_user.short_name}_greenhouse_bronze"
+      adp_bronze_schema: "dev_${workspace.current_user.short_name}_adp_bronze"
+      kronos_bronze_schema: "dev_${workspace.current_user.short_name}_kronos_bronze"
+      cornerstone_bronze_schema: "dev_${workspace.current_user.short_name}_cornerstone_bronze"
+      culture_amp_bronze_schema: "dev_${workspace.current_user.short_name}_culture_amp_bronze"
       success_factor_silver_schema: "dev_${workspace.current_user.short_name}_success_factor_silver"
-      success_factor_gold_schema: "dev_${workspace.current_user.short_name}_success_factor_gold"
+      greenhouse_silver_schema: "dev_${workspace.current_user.short_name}_greenhouse_silver"
+      adp_silver_schema: "dev_${workspace.current_user.short_name}_adp_silver"
+      kronos_silver_schema: "dev_${workspace.current_user.short_name}_kronos_silver"
+      cornerstone_silver_schema: "dev_${workspace.current_user.short_name}_cornerstone_silver"
+      culture_amp_silver_schema: "dev_${workspace.current_user.short_name}_culture_amp_silver"
+      workforce_gold_schema: "dev_${workspace.current_user.short_name}_workforce_gold"
+      compensation_gold_schema: "dev_${workspace.current_user.short_name}_compensation_gold"
+      talent_acquisition_gold_schema: "dev_${workspace.current_user.short_name}_talent_acquisition_gold"
+      learning_development_gold_schema: "dev_${workspace.current_user.short_name}_learning_development_gold"
+      engagement_retention_gold_schema: "dev_${workspace.current_user.short_name}_engagement_retention_gold"
+      governance_schema: "dev_${workspace.current_user.short_name}_governance"
 
     workspace:
       host: https://dbc-5346a843-c2e6.cloud.databricks.com/

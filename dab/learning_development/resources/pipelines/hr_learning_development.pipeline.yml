@@ -1,0 +1,19 @@
+resources:
+  pipelines:
+    hr_learning_development_pipeline:
+      name: hr_learning_development
+      catalog: ${var.catalog}
+      schema: ${var.learning_development_gold_schema}
+      serverless: true
+      continuous: false
+      root_path: ../../src
+      libraries:
+        - glob:
+            include: ../../src/**
+      configuration:
+        catalog: ${var.catalog}
+        cornerstone_bronze_schema: ${var.cornerstone_bronze_schema}
+        cornerstone_silver_schema: ${var.cornerstone_silver_schema}
+        # Owned and refreshed by the workforce bundle
+        success_factor_silver_schema: ${var.success_factor_silver_schema}
+        learning_development_gold_schema: ${var.learning_development_gold_schema}

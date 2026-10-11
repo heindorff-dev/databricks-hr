@@ -1,0 +1,19 @@
+resources:
+  pipelines:
+    hr_compensation_pipeline:
+      name: hr_compensation
+      catalog: ${var.catalog}
+      schema: ${var.compensation_gold_schema}
+      serverless: true
+      continuous: false
+      root_path: ../../src
+      libraries:
+        - glob:
+            include: ../../src/**
+      configuration:
+        catalog: ${var.catalog}
+        adp_bronze_schema: ${var.adp_bronze_schema}
+        adp_silver_schema: ${var.adp_silver_schema}
+        # Owned and refreshed by the workforce bundle
+        success_factor_silver_schema: ${var.success_factor_silver_schema}
+        compensation_gold_schema: ${var.compensation_gold_schema}

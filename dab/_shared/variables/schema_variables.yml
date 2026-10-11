@@ -1,7 +1,44 @@
 variables:
+  # Bronze: one schema per source system
   success_factor_bronze_schema:
     default: "success_factor_bronze"
+  greenhouse_bronze_schema:
+    default: "greenhouse_bronze"
+  adp_bronze_schema:
+    default: "adp_bronze"
+  kronos_bronze_schema:
+    default: "kronos_bronze"
+  cornerstone_bronze_schema:
+    default: "cornerstone_bronze"
+  culture_amp_bronze_schema:
+    default: "culture_amp_bronze"
+
+  # Silver: one schema per source system
   success_factor_silver_schema:
     default: "success_factor_silver"
-  success_factor_gold_schema:
-    default: "success_factor_gold"
+  greenhouse_silver_schema:
+    default: "greenhouse_silver"
+  adp_silver_schema:
+    default: "adp_silver"
+  kronos_silver_schema:
+    default: "kronos_silver"
+  cornerstone_silver_schema:
+    default: "cornerstone_silver"
+  culture_amp_silver_schema:
+    default: "culture_amp_silver"
+
+  # Gold: one schema per data product
+  workforce_gold_schema:
+    default: "workforce_gold"
+  compensation_gold_schema:
+    default: "compensation_gold"
+  talent_acquisition_gold_schema:
+    default: "talent_acquisition_gold"
+  learning_development_gold_schema:
+    default: "learning_development_gold"
+  engagement_retention_gold_schema:
+    default: "engagement_retention_gold"
+
+  # Governance: ABAC mask functions
+  governance_schema:
+    default: "governance"

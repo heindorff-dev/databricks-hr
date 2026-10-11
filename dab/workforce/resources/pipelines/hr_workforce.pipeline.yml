@@ -1,0 +1,19 @@
+resources:
+  pipelines:
+    hr_workforce_pipeline:
+      name: hr_workforce
+      catalog: ${var.catalog}
+      schema: ${var.workforce_gold_schema}
+      serverless: true
+      continuous: false
+      root_path: ../../src
+      libraries:
+        - glob:
+            include: ../../src/**
+      configuration:
+        catalog: ${var.catalog}
+        success_factor_bronze_schema: ${var.success_factor_bronze_schema}
+        kronos_bronze_schema: ${var.kronos_bronze_schema}
+        success_factor_silver_schema: ${var.success_factor_silver_schema}
+        kronos_silver_schema: ${var.kronos_silver_schema}
+        workforce_gold_schema: ${var.workforce_gold_schema}

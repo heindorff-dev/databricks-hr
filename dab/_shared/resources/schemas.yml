@@ -1,25 +1,149 @@
 resources:
   schemas:
+    # ---------- Bronze (source systems) ----------
     success_factor_bronze:
       name: ${var.success_factor_bronze_schema}
       catalog_name: ${var.catalog}
-      comment: "HR SuccessFactors bronze data"
+      comment: "HR SuccessFactors bronze data (core HR, raw OData extracts)"
       grants:
         - principal: grp-hr-bronze-reader
           privileges: [SELECT, USE_SCHEMA]
 
+    greenhouse_bronze:
+      name: ${var.greenhouse_bronze_schema}
+      catalog_name: ${var.catalog}
+      comment: "HR Greenhouse bronze data (recruiting / ATS, raw API extracts)"
+      grants:
+        - principal: grp-hr-bronze-reader
+          privileges: [SELECT, USE_SCHEMA]
+
+    adp_bronze:
+      name: ${var.adp_bronze_schema}
+      catalog_name: ${var.catalog}
+      comment: "HR ADP bronze data (payroll, raw file extracts)"
+      grants:
+        - principal: grp-hr-bronze-reader
+          privileges: [SELECT, USE_SCHEMA]
+
+    kronos_bronze:
+      name: ${var.kronos_bronze_schema}
+      catalog_name: ${var.catalog}
+      comment: "HR Kronos bronze data (time and absence, raw extracts)"
+      grants:
+        - principal: grp-hr-bronze-reader
+          privileges: [SELECT, USE_SCHEMA]
+
+    cornerstone_bronze:
+      name: ${var.cornerstone_bronze_schema}
+      catalog_name: ${var.catalog}
+      comment: "HR Cornerstone bronze data (learning management, raw extracts)"
+      grants:
+        - principal: grp-hr-bronze-reader
+          privileges: [SELECT, USE_SCHEMA]
+
+    culture_amp_bronze:
+      name: ${var.culture_amp_bronze_schema}
+      catalog_name: ${var.catalog}
+      comment: "HR Culture Amp bronze data (engagement surveys, raw extracts)"
+      grants:
+        - principal: grp-hr-bronze-reader
+          privileges: [SELECT, USE_SCHEMA]
+
+    # ---------- Silver (source systems) ----------
     success_factor_silver:
       name: ${var.success_factor_silver_schema}
       catalog_name: ${var.catalog}
-      comment: "HR SuccessFactors silver data"
+      comment: "HR SuccessFactors silver data (cleaned, typed, documented)"
       grants:
         - principal: grp-hr-silver-reader
           privileges: [SELECT, USE_SCHEMA]
 
-    success_factor_gold:
-      name: ${var.success_factor_gold_schema}
+    greenhouse_silver:
+      name: ${var.greenhouse_silver_schema}
       catalog_name: ${var.catalog}
-      comment: "HR SuccessFactors gold data"
+      comment: "HR Greenhouse silver data (cleaned, typed, documented)"
+      grants:
+        - principal: grp-hr-silver-reader
+          privileges: [SELECT, USE_SCHEMA]
+
+    adp_silver:
+      name: ${var.adp_silver_schema}
+      catalog_name: ${var.catalog}
+      comment: "HR ADP silver data (cleaned, typed, documented)"
+      grants:
+        - principal: grp-hr-silver-reader
+          privileges: [SELECT, USE_SCHEMA]
+
+    kronos_silver:
+      name: ${var.kronos_silver_schema}
+      catalog_name: ${var.catalog}
+      comment: "HR Kronos silver data (cleaned, typed, documented)"
+      grants:
+        - principal: grp-hr-silver-reader
+          privileges: [SELECT, USE_SCHEMA]
+
+    cornerstone_silver:
+      name: ${var.cornerstone_silver_schema}
+      catalog_name: ${var.catalog}
+      comment: "HR Cornerstone silver data (cleaned, typed, documented)"
+      grants:
+        - principal: grp-hr-silver-reader
+          privileges: [SELECT, USE_SCHEMA]
+
+    culture_amp_silver:
+      name: ${var.culture_amp_silver_schema}
+      catalog_name: ${var.catalog}
+      comment: "HR Culture Amp silver data (cleaned, typed, documented)"
+      grants:
+        - principal: grp-hr-silver-reader
+          privileges: [SELECT, USE_SCHEMA]
+
+    # ---------- Gold (data products) ----------
+    workforce_gold:
+      name: ${var.workforce_gold_schema}
+      catalog_name: ${var.catalog}
+      comment: "Workforce data product: employee and department dimensions, headcount and absence"
       grants:
         - principal: grp-hr-gold-reader
           privileges: [SELECT, USE_SCHEMA]
+
+    compensation_gold:
+      name: ${var.compensation_gold_schema}
+      catalog_name: ${var.catalog}
+      comment: "Compensation data product: payroll, labor cost and compa-ratio"
+      grants:
+        - principal: grp-hr-gold-reader
+          privileges: [SELECT, USE_SCHEMA]
+
+    talent_acquisition_gold:
+      name: ${var.talent_acquisition_gold_schema}
+      catalog_name: ${var.catalog}
+      comment: "Talent acquisition data product: recruiting funnel and source effectiveness"
+      grants:
+        - principal: grp-hr-gold-reader
+          privileges: [SELECT, USE_SCHEMA]
+
+    learning_development_gold:
+      name: ${var.learning_development_gold_schema}
+      catalog_name: ${var.catalog}
+      comment: "Learning and development data product: training completion and learning hours"
+      grants:
+        - principal: grp-hr-gold-reader
+          privileges: [SELECT, USE_SCHEMA]
+
+    engagement_retention_gold:
+      name: ${var.engagement_retention_gold_schema}
+      catalog_name: ${var.catalog}
+      comment: "Engagement and retention data product: eNPS and attrition"
+      grants:
+        - principal: grp-hr-gold-reader
+          privileges: [SELECT, USE_SCHEMA]
+
+    # ---------- Governance ----------
+    governance:
+      name: ${var.governance_schema}
+      catalog_name: ${var.catalog}
+      comment: "HR governance objects: ABAC column mask functions for PII"
+      grants:
+        - principal: account users
+          privileges: [EXECUTE, USE_SCHEMA]

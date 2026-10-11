@@ -1,0 +1,76 @@
+resources:
+  jobs:
+    hr_workforce:
+      name: hr_workforce
+      description: Workforce data product. Optionally regenerates bronze, then always refreshes silver and gold.
+      max_concurrent_runs: 1
+      tags:
+        "People and Culture": ""
+        environment: ${var.environment}
+      parameters:
+        - name: init_bronze
+          default: "false"
+        - name: schemas
+          default: >-
+            ${var.success_factor_silver_schema},${var.kronos_silver_schema},${var.workforce_gold_schema}
+      tasks:
+        - task_key: check_init_bronze
+          condition_task:
+            op: EQUAL_TO
+            left: "{{job.parameters.init_bronze}}"
+            right: "true"
+
+        - task_key: init_success_factor
+          depends_on:
+            - task_key: check_init_bronze
+              outcome: "true"
+          notebook_task:
+            notebook_path: ../../../_shared/bronze_init/success_factor.py
+            base_parameters:
+              catalog: ${var.catalog}
+              schema: ${var.success_factor_bronze_schema}
+        - task_key: init_kronos
+          depends_on:
+            - task_key: check_init_bronze
+              outcome: "true"
+          notebook_task:
+            notebook_path: ../../../_shared/bronze_init/kronos.py
+            base_parameters:
+              catalog: ${var.catalog}
+              schema: ${var.kronos_bronze_schema}
+
+        # Bronze tables are recreated by the init tasks, so streaming checkpoints are reset.
+        - task_key: refresh_full
+          depends_on:
+            - task_key: init_success_factor
+            - task_key: init_kronos
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.hr_workforce_pipeline.id}
+            full_refresh: true
+        - task_key: refresh_incremental
+          depends_on:
+            - task_key: check_init_bronze
+              outcome: "false"
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.hr_workforce_pipeline.id}
+
+        - task_key: tag_tables
+          depends_on:
+            - task_key: refresh_full
+            - task_key: refresh_incremental
+          run_if: NONE_FAILED
+          notebook_task:
+            notebook_path: ../../../_shared/ops/tag_hr_tables.py
+            base_parameters:
+              catalog: ${var.catalog}
+              schemas: "{{job.parameters.schemas}}"
+
+        - task_key: column_metadata
+          depends_on:
+            - task_key: tag_tables
+          notebook_task:
+            notebook_path: ../../metadata/column_metadata.sql
+            base_parameters:
+              catalog: ${var.catalog}
+              success_factor_silver_schema: ${var.success_factor_silver_schema}
+              workforce_gold_schema: ${var.workforce_gold_schema}

@@ -1,0 +1,17 @@
+resources:
+  pipelines:
+    hr_talent_acquisition_pipeline:
+      name: hr_talent_acquisition
+      catalog: ${var.catalog}
+      schema: ${var.talent_acquisition_gold_schema}
+      serverless: true
+      continuous: false
+      root_path: ../../src
+      libraries:
+        - glob:
+            include: ../../src/**
+      configuration:
+        catalog: ${var.catalog}
+        greenhouse_bronze_schema: ${var.greenhouse_bronze_schema}
+        greenhouse_silver_schema: ${var.greenhouse_silver_schema}
+        talent_acquisition_gold_schema: ${var.talent_acquisition_gold_schema}

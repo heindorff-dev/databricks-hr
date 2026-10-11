@@ -1,14 +1,9 @@
 # Databricks notebook source
 dbutils.widgets.text("catalog", "")
-dbutils.widgets.text("success_factor_bronze_schema", "")
-dbutils.widgets.text("success_factor_silver_schema", "")
-dbutils.widgets.text("success_factor_gold_schema", "")
+dbutils.widgets.text("schemas", "")
 
 catalog = dbutils.widgets.get("catalog")
-success_factor_bronze_schema = dbutils.widgets.get("success_factor_bronze_schema")
-success_factor_silver_schema = dbutils.widgets.get("success_factor_silver_schema")
-success_factor_gold_schema = dbutils.widgets.get("success_factor_gold_schema")
+schemas = [s.strip() for s in dbutils.widgets.get("schemas").split(",") if s.strip()]
 
-spark.sql(f"ALTER SCHEMA {catalog}.{success_factor_bronze_schema} SET TAGS ('People and Culture')")
-spark.sql(f"ALTER SCHEMA {catalog}.{success_factor_silver_schema} SET TAGS ('People and Culture')")
-spark.sql(f"ALTER SCHEMA {catalog}.{success_factor_gold_schema} SET TAGS ('People and Culture')")
+for schema in schemas:
+    spark.sql(f"ALTER SCHEMA `{catalog}`.`{schema}` SET TAGS ('People and Culture')")

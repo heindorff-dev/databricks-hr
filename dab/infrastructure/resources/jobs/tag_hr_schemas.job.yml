@@ -11,6 +11,16 @@ resources:
             notebook_path: ../../src/tag_hr_schemas.py
             base_parameters:
               catalog: ${var.catalog}
-              success_factor_bronze_schema: ${resources.schemas.success_factor_bronze.name}
-              success_factor_silver_schema: ${resources.schemas.success_factor_silver.name}
-              success_factor_gold_schema: ${resources.schemas.success_factor_gold.name}
+              schemas: >-
+                ${resources.schemas.success_factor_bronze.name},${resources.schemas.greenhouse_bronze.name},${resources.schemas.adp_bronze.name},${resources.schemas.kronos_bronze.name},${resources.schemas.cornerstone_bronze.name},${resources.schemas.culture_amp_bronze.name},${resources.schemas.success_factor_silver.name},${resources.schemas.greenhouse_silver.name},${resources.schemas.adp_silver.name},${resources.schemas.kronos_silver.name},${resources.schemas.cornerstone_silver.name},${resources.schemas.culture_amp_silver.name},${resources.schemas.workforce_gold.name},${resources.schemas.compensation_gold.name},${resources.schemas.talent_acquisition_gold.name},${resources.schemas.learning_development_gold.name},${resources.schemas.engagement_retention_gold.name},${resources.schemas.governance.name}
+
+        # Creates the governed tag 'pii' (tag policy), the mask function and the ABAC policy.
+        - task_key: apply_pii_policy
+          depends_on:
+            - task_key: apply_governed_tags
+          notebook_task:
+            notebook_path: ../../src/apply_pii_policy.py
+            base_parameters:
+              catalog: ${var.catalog}
+              schema: ${resources.schemas.governance.name}
+              exempt_group: grp-hr-sensitive

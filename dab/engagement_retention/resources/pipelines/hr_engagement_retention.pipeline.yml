@@ -1,0 +1,19 @@
+resources:
+  pipelines:
+    hr_engagement_retention_pipeline:
+      name: hr_engagement_retention
+      catalog: ${var.catalog}
+      schema: ${var.engagement_retention_gold_schema}
+      serverless: true
+      continuous: false
+      root_path: ../../src
+      libraries:
+        - glob:
+            include: ../../src/**
+      configuration:
+        catalog: ${var.catalog}
+        culture_amp_bronze_schema: ${var.culture_amp_bronze_schema}
+        culture_amp_silver_schema: ${var.culture_amp_silver_schema}
+        # Owned and refreshed by the workforce bundle
+        success_factor_silver_schema: ${var.success_factor_silver_schema}
+        engagement_retention_gold_schema: ${var.engagement_retention_gold_schema}

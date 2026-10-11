@@ -1,0 +1,16 @@
+bundle:
+  name: hr_workforce
+  engine: direct
+
+include:
+  - ../_shared/targets/*.yml
+  - ../_shared/variables/*.yml
+  - resources/pipelines/*.pipeline.yml
+  - resources/jobs/*.job.yml
+
+# Shared notebooks (bronze generators, table tagging) live outside the bundle root.
+sync:
+  paths:
+    - .
+    - ../_shared/bronze_init
+    - ../_shared/ops
